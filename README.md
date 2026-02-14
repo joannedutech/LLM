@@ -31,6 +31,10 @@ LLM/
 └── .gitattributes
 ```
 
+## 作者
+
+**陳孟真** — [@joannedutech](https://github.com/joannedutech)
+
 ## 授權條款
 
 本專案採用 [MIT License](LICENSE) 授權。
