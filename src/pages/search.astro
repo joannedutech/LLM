@@ -1,0 +1,63 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Headline from '~/components/blog/Headline.astro';
+
+const metadata = {
+  title: '搜尋',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
+    <Headline subtitle="輸入關鍵字搜尋所有文章">搜尋文章</Headline>
+
+    <div id="search-container" class="max-w-2xl mx-auto">
+      <div id="search" class="pagefind-search"></div>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  async function initPagefind() {
+    var el = document.getElementById('search');
+    if (!el) return;
+
+    // Load CSS
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/LLM/pagefind/pagefind-ui.css';
+    document.head.appendChild(link);
+
+    try {
+      var pagefind = await import('/LLM/pagefind/pagefind-ui.js');
+      new pagefind.PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+        translations: {
+          placeholder: '搜尋文章...',
+          zero_results: '找不到相關結果',
+          many_results: '找到 [COUNT] 筆相關結果',
+          one_result: '找到 [COUNT] 筆相關結果',
+        },
+      });
+    } catch (e) {
+      el.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">搜尋功能需要先執行 build 才能使用。</p>';
+    }
+  }
+  initPagefind();
+</script>
+
+<style is:inline>
+  .pagefind-ui .pagefind-ui__search-input {
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+  .dark .pagefind-ui {
+    --pagefind-ui-primary: rgb(96 165 250);
+    --pagefind-ui-text: rgb(203 213 225);
+    --pagefind-ui-background: rgb(15 23 42);
+    --pagefind-ui-border: rgb(51 65 85);
+  }
+</style>

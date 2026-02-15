@@ -1,0 +1,50 @@
+---
+import type { Stats as Props } from '~/types';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import { Icon } from 'astro-icon/components';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+  stats = [],
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 text-center">
+    {
+      stats &&
+        stats.map(({ amount, title, icon, href }) => {
+          const Wrapper = href ? 'a' : 'div';
+          const wrapperProps = href ? { href, class: "block p-4 md:border-r md:last:border-none dark:md:border-slate-500 intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade intersect-quarter hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors rounded-lg" } : { class: "p-4 md:border-r md:last:border-none dark:md:border-slate-500 intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade intersect-quarter" };
+          return (
+            <Wrapper {...wrapperProps}>
+              {icon && (
+                <div class="flex items-center justify-center mx-auto mb-4 text-primary">
+                  <Icon name={icon} class="w-10 h-10" />
+                </div>
+              )}
+              {amount && (
+                <div class="font-heading text-primary text-3xl sm:text-4xl font-bold dark:text-white lg:text-5xl xl:text-6xl">
+                  {amount}
+                </div>
+              )}
+              {title && (
+                <div class="text-xs sm:text-sm font-medium uppercase tracking-widest text-gray-800 dark:text-slate-400 lg:text-base">
+                  {title}
+                </div>
+              )}
+            </Wrapper>
+          );
+        })
+    }
+  </div>
+</WidgetWrapper>

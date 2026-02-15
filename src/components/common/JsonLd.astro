@@ -1,0 +1,71 @@
+---
+import { SITE, METADATA } from 'astrowind:config';
+
+export interface Props {
+  type?: 'website' | 'article';
+  title?: string;
+  description?: string;
+  image?: string;
+  publishDate?: string | Date;
+  updateDate?: string | Date;
+  tags?: string[];
+  category?: string;
+  url?: string;
+}
+
+const {
+  type = 'website',
+  title,
+  description,
+  image,
+  publishDate,
+  updateDate,
+  tags,
+  category,
+  url = Astro.url.href,
+} = Astro.props;
+
+const siteName = SITE?.name || 'SSDC 研究筆記';
+const siteUrl = SITE?.site || 'https://ssdc-research.pages.dev';
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: siteName,
+  url: siteUrl,
+  description: METADATA?.description || '',
+  logo: `${siteUrl}/favicon.svg`,
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteName,
+  url: siteUrl,
+  description: METADATA?.description || '',
+  inLanguage: 'zh-TW',
+};
+
+const articleSchema = type === 'article' ? {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description,
+  url: url,
+  inLanguage: 'zh-TW',
+  ...(image ? { image: image } : {}),
+  ...(publishDate ? { datePublished: new Date(publishDate).toISOString() } : {}),
+  ...(updateDate ? { dateModified: new Date(updateDate).toISOString() } : publishDate ? { dateModified: new Date(publishDate).toISOString() } : {}),
+  ...(tags?.length ? { keywords: tags.join(', ') } : {}),
+  ...(category ? { articleSection: category } : {}),
+  publisher: {
+    '@type': 'Organization',
+    name: siteName,
+    url: siteUrl,
+  },
+} : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+{articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}

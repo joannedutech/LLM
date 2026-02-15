@@ -1,0 +1,73 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+
+import merge from 'lodash.merge';
+import type { ImageMetadata } from 'astro';
+import Layout from '~/layouts/PageLayout.astro';
+import SinglePost from '~/components/blog/SinglePost.astro';
+import ToBlogLink from '~/components/blog/ToBlogLink.astro';
+
+import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
+import PostNavigation from '~/components/blog/PostNavigation.astro';
+import { getCanonical, getPermalink } from '~/utils/permalinks';
+import { getStaticPathsBlogPost, blogPostRobots } from '~/utils/blog';
+import { findImage } from '~/utils/images';
+import type { MetaData } from '~/types';
+import RelatedPosts from '~/components/blog/RelatedPosts.astro';
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+  return await getStaticPathsBlogPost();
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post, prevPost, nextPost } = Astro.props as Props;
+
+const url = getCanonical(getPermalink(post.permalink, 'post'));
+const image = (await findImage(post.image)) as ImageMetadata | string | undefined;
+
+const metadata = merge(
+  {
+    title: post.title,
+    description: post.excerpt,
+    robots: {
+      index: blogPostRobots?.index,
+      follow: blogPostRobots?.follow,
+    },
+    openGraph: {
+      type: 'article',
+      ...(image
+        ? { images: [{ url: image, width: (image as ImageMetadata)?.width, height: (image as ImageMetadata)?.height }] }
+        : {}),
+    },
+  },
+  { ...(post?.metadata ? { ...post.metadata, canonical: post.metadata?.canonical || url } : {}) }
+) as MetaData;
+---
+
+<Layout metadata={metadata} jsonLd={{
+  type: 'article',
+  title: post.title,
+  description: post.excerpt,
+  image: typeof image === 'string' ? image : undefined,
+  publishDate: post.publishDate,
+  updateDate: post.updateDate,
+  tags: post.tags,
+  category: post.category,
+  url: url,
+}}>
+  <Breadcrumbs items={[
+    { label: '首頁', href: '/' },
+    { label: '文章列表', href: '/blog' },
+    ...(post.category ? [{ label: post.category.title, href: getPermalink(post.category.slug, 'category') }] : []),
+    { label: post.title },
+  ]} />
+  <SinglePost post={{ ...post, image: image }} url={url}>
+    {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}
+  </SinglePost>
+  <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+  <ToBlogLink />
+  <RelatedPosts post={post} />
+</Layout>

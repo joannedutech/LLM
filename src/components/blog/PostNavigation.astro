@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getPermalink } from '~/utils/permalinks';
+
+export interface NavPost {
+  title: string;
+  permalink: string;
+}
+
+export interface Props {
+  prevPost?: NavPost | null;
+  nextPost?: NavPost | null;
+}
+
+const { prevPost, nextPost } = Astro.props;
+---
+
+{
+  (prevPost || nextPost) && (
+    <nav aria-label="文章導覽" class="mx-auto px-6 sm:px-6 max-w-3xl mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {prevPost ? (
+          <a
+            href={getPermalink(prevPost.permalink, 'post')}
+            class="group flex items-start gap-2 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50"
+          >
+            <Icon name="tabler:chevron-left" class="w-5 h-5 mt-0.5 shrink-0 text-muted group-hover:text-primary" />
+            <div>
+              <div class="text-xs text-muted uppercase tracking-wide mb-1">上一篇</div>
+              <div class="text-sm font-medium text-heading group-hover:text-primary line-clamp-2">{prevPost.title}</div>
+            </div>
+          </a>
+        ) : (
+          <div />
+        )}
+        {nextPost ? (
+          <a
+            href={getPermalink(nextPost.permalink, 'post')}
+            class="group flex items-start gap-2 p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 sm:text-right sm:flex-row-reverse"
+          >
+            <Icon name="tabler:chevron-right" class="w-5 h-5 mt-0.5 shrink-0 text-muted group-hover:text-primary" />
+            <div>
+              <div class="text-xs text-muted uppercase tracking-wide mb-1">下一篇</div>
+              <div class="text-sm font-medium text-heading group-hover:text-primary line-clamp-2">{nextPost.title}</div>
+            </div>
+          </a>
+        ) : (
+          <div />
+        )}
+      </div>
+    </nav>
+  )
+}

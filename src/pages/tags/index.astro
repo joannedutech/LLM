@@ -1,0 +1,56 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Headline from '~/components/blog/Headline.astro';
+import { fetchPosts } from '~/utils/blog';
+import { loadTagRegistry } from '~/utils/tags';
+import { getPermalink } from '~/utils/permalinks';
+
+const posts = await fetchPosts();
+const registry = loadTagRegistry();
+
+// Count posts per tag
+const tagCounts: Record<string, number> = {};
+for (const post of posts) {
+  if (post.tags) {
+    for (const tag of post.tags) {
+      tagCounts[tag.title] = (tagCounts[tag.title] || 0) + 1;
+    }
+  }
+}
+
+const metadata = {
+  title: '標籤總覽',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
+    <Headline subtitle="依主題分組瀏覽所有標籤">標籤總覽</Headline>
+
+    <div class="space-y-10">
+      {registry.groups.map((group) => (
+        <div>
+          <h3 class="text-xl font-bold mb-4 text-default dark:text-slate-200 border-b border-gray-200 dark:border-slate-700 pb-2">
+            {group.name}
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            {group.tags.map((tag) => {
+              const count = tagCounts[tag.canonical] || 0;
+              return (
+                <a
+                  href={getPermalink(tag.canonical, 'tag')}
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white transition-colors"
+                >
+                  {tag.canonical}
+                  {count > 0 && (
+                    <span class="text-xs opacity-60">({count})</span>
+                  )}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

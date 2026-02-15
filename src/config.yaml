@@ -1,0 +1,59 @@
+site:
+  name: 個人知識庫
+  site: 'https://joannchen.github.io/LLM'
+  base: '/LLM'
+  trailingSlash: false
+
+metadata:
+  title:
+    default: 個人知識庫
+    template: '%s — 個人知識庫'
+  description: '個人知識庫 — 投資知識、產品管理、讀書心得'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: 個人知識庫
+    type: website
+    locale: zh_TW
+  twitter:
+    cardType: summary_large_image
+
+i18n:
+  language: zh-TW
+  textDirection: ltr
+
+apps:
+  blog:
+    isEnabled: true
+    postsPerPage: 12
+
+    post:
+      isEnabled: true
+      permalink: '/%slug%'
+      robots:
+        index: true
+
+    list:
+      isEnabled: true
+      pathname: 'blog'
+      robots:
+        index: true
+
+    category:
+      isEnabled: true
+      pathname: 'category'
+      robots:
+        index: true
+
+    tag:
+      isEnabled: true
+      pathname: 'tag'
+      robots:
+        index: true
+
+    isRelatedPostsEnabled: true
+    relatedPostsCount: 4
+
+ui:
+  theme: 'system'

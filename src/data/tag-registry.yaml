@@ -1,0 +1,58 @@
+groups:
+  - name: 投資知識
+    tags:
+      - canonical: 價值投資
+        synonyms: [價值型投資, value investing]
+      - canonical: 指數投資
+        synonyms: [被動投資, ETF投資, index investing]
+      - canonical: 技術分析
+        synonyms: [技術面分析, technical analysis]
+      - canonical: 總經分析
+        synonyms: [總體經濟, 宏觀分析, macro analysis]
+      - canonical: 行為經濟學
+        synonyms: [行為金融學, behavioral economics]
+      - canonical: 財報分析
+        synonyms: [財務報表分析, financial analysis]
+
+  - name: 產品管理
+    tags:
+      - canonical: 專案管理
+        synonyms: [項目管理, project management]
+      - canonical: 產品設計
+        synonyms: [product design]
+      - canonical: 溝通技巧
+        synonyms: [溝通能力, communication]
+      - canonical: 領導力
+        synonyms: [領導能力, leadership]
+      - canonical: 時間管理
+        synonyms: [time management]
+      - canonical: 工程技術
+        synonyms: [技術, engineering]
+
+  - name: 讀書心得
+    tags:
+      - canonical: 心理學
+        synonyms: [psychology]
+      - canonical: 商業思維
+        synonyms: [商業模式, business thinking]
+      - canonical: 自我成長
+        synonyms: [個人成長, self improvement]
+      - canonical: 歷史
+        synonyms: [history]
+      - canonical: 哲學
+        synonyms: [philosophy]
+      - canonical: 科學
+        synonyms: [science]
+
+  - name: 通用概念
+    tags:
+      - canonical: 決策思維
+        synonyms: [決策, decision making]
+      - canonical: 系統性思考
+        synonyms: [系統思考, systems thinking]
+      - canonical: 認知偏誤
+        synonyms: [認知偏差, cognitive bias]
+      - canonical: 心智模型
+        synonyms: [思維模型, mental model]
+      - canonical: 數據分析
+        synonyms: [資料分析, data analysis]

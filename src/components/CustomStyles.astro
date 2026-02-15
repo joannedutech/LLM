@@ -1,0 +1,57 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/noto-sans-tc';
+---
+
+<style is:inline>
+  :root {
+    /* Font system — Chinese-optimized with fallbacks */
+    --aw-font-sans: 'Noto Sans TC Variable', 'Inter Variable', 'PingFang TC', 'Microsoft JhengHei', ui-sans-serif, sans-serif;
+    --aw-font-serif: 'Noto Sans TC Variable', 'Inter Variable', 'PingFang TC', ui-serif, serif;
+    --aw-font-heading: 'Noto Sans TC Variable', 'Inter Variable', 'PingFang TC', ui-sans-serif, sans-serif;
+
+    /* Knowledge-blue color palette */
+    --aw-color-primary: rgb(37 99 235);         /* Blue-600 — 知識藍 */
+    --aw-color-secondary: rgb(29 78 216);       /* Blue-700 */
+    --aw-color-accent: rgb(217 119 6);          /* Amber-600 — 暖色點綴 */
+
+    /* Light mode text & background */
+    --aw-color-text-heading: rgb(15 23 42);
+    --aw-color-text-default: rgb(30 41 59);
+    --aw-color-text-muted: rgb(30 41 59 / 60%);
+    --aw-color-bg-page: rgb(249 250 251);       /* Cool white */
+
+    --aw-color-bg-page-dark: rgb(10 13 20);     /* Deep dark blue-black */
+
+    /* Unified animation easing */
+    --aw-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --aw-duration: 0.3s;
+
+    /* Fluid typography — clamp(min, preferred, max) */
+    --aw-text-hero: clamp(2.25rem, 5vw, 4rem);          /* 36px → 64px */
+    --aw-text-h1: clamp(1.875rem, 4vw, 3rem);           /* 30px → 48px */
+    --aw-text-h2: clamp(1.5rem, 3vw, 2.25rem);          /* 24px → 36px */
+    --aw-text-h3: clamp(1.25rem, 2.5vw, 1.75rem);       /* 20px → 28px */
+    --aw-text-body: clamp(0.9375rem, 1.2vw, 1.125rem);  /* 15px → 18px */
+
+    ::selection {
+      background-color: rgb(37 99 235 / 20%);
+    }
+  }
+
+  .dark {
+    --aw-color-primary: rgb(96 165 250);        /* Blue-400 for dark mode */
+    --aw-color-secondary: rgb(59 130 246);      /* Blue-500 */
+    --aw-color-accent: rgb(251 191 36);         /* Amber-400 accent */
+
+    --aw-color-text-heading: rgb(241 245 249);
+    --aw-color-text-default: rgb(203 213 225);
+    --aw-color-text-muted: rgb(203 213 225 / 60%);
+    --aw-color-bg-page: rgb(10 13 20);
+
+    ::selection {
+      background-color: rgb(96 165 250 / 25%);
+      color: white;
+    }
+  }
+</style>

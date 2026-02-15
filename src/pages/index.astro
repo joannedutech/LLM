@@ -1,0 +1,53 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import HeroText from '~/components/widgets/HeroText.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Stats from '~/components/widgets/Stats.astro';
+
+import { fetchPosts } from '~/utils/blog';
+import { getAllTags } from '~/utils/tags';
+
+const posts = await fetchPosts();
+const allTags = getAllTags();
+const categories = new Set(posts.map((p) => p.category?.title).filter(Boolean));
+
+const metadata = {
+  title: '個人知識庫 — 投資知識・產品管理・讀書心得',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <HeroText>
+    <Fragment slot="title">
+      個人知識庫
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      投資知識・產品管理・讀書心得
+    </Fragment>
+
+    <Fragment slot="content">
+      <p class="text-sm sm:text-base md:text-lg text-muted dark:text-slate-400 text-center max-w-3xl mx-auto leading-relaxed">
+        匯集投資研究、產品管理實務與讀書心得<br />
+        用系統化的方式累積和分享知識
+      </p>
+    </Fragment>
+  </HeroText>
+
+  <Stats
+    stats={[
+      { title: '文章數', amount: String(posts.length) },
+      { title: '分類', amount: String(categories.size) },
+      { title: '標籤', amount: String(allTags.length) },
+    ]}
+  />
+
+  <BlogLatestPosts
+    title="最新文章"
+    linkText="查看所有文章"
+    count={6}
+    information="持續更新中 — 投資知識、產品管理心法、讀書筆記與反思。"
+  />
+</Layout>
