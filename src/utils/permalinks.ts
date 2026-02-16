@@ -30,8 +30,13 @@ const CATEGORY_SLUG_MAP: Record<string, string> = {
 
 export const ALL_CATEGORIES = Object.entries(CATEGORY_SLUG_MAP).map(([title, slug]) => ({ title, slug }));
 
-export const getCategorySlug = (category: string): string =>
-  CATEGORY_SLUG_MAP[category] || cleanSlug(category);
+const CATEGORY_SLUG_SET = new Set(Object.values(CATEGORY_SLUG_MAP));
+
+export const getCategorySlug = (category: string): string => {
+  // If it's already a valid slug (e.g. 'ProductManagement'), return as-is
+  if (CATEGORY_SLUG_SET.has(category)) return category;
+  return CATEGORY_SLUG_MAP[category] || cleanSlug(category);
+};
 
 export const BLOG_BASE = cleanSlug(APP_BLOG?.list?.pathname);
 export const CATEGORY_BASE = cleanSlug(APP_BLOG?.category?.pathname);
