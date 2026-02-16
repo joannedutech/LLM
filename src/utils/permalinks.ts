@@ -28,6 +28,8 @@ const CATEGORY_SLUG_MAP: Record<string, string> = {
   '人機互動': 'HCI',
 };
 
+export const ALL_CATEGORIES = Object.entries(CATEGORY_SLUG_MAP).map(([title, slug]) => ({ title, slug }));
+
 export const getCategorySlug = (category: string): string =>
   CATEGORY_SLUG_MAP[category] || cleanSlug(category);
 
