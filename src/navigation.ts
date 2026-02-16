@@ -21,6 +21,10 @@ export const headerData = {
           text: '讀書心得',
           href: getPermalink('讀書心得', 'category'),
         },
+        {
+          text: '人機互動',
+          href: getPermalink('人機互動', 'category'),
+        },
       ],
     },
     {
@@ -40,6 +44,6 @@ export const footerData = {
   secondaryLinks: [],
   socialLinks: [],
   footNote: `
-    個人知識庫 — 投資知識・產品管理・讀書心得
+    陳孟真的blog — 投資知識・產品管理・讀書心得・人機互動
   `,
 };

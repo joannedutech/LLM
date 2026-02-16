@@ -1,19 +1,19 @@
 site:
-  name: 個人知識庫
-  site: 'https://joannchen.github.io/LLM'
+  name: 陳孟真的blog
+  site: 'https://joannedutech.github.io/LLM'
   base: '/LLM'
   trailingSlash: false
 
 metadata:
   title:
-    default: 個人知識庫
-    template: '%s — 個人知識庫'
-  description: '個人知識庫 — 投資知識、產品管理、讀書心得'
+    default: 陳孟真的blog
+    template: '%s — 陳孟真的blog'
+  description: '陳孟真的blog — 投資知識、產品管理、讀書心得、人機互動'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: 個人知識庫
+    site_name: 陳孟真的blog
     type: website
     locale: zh_TW
   twitter:

@@ -44,6 +44,21 @@ groups:
       - canonical: 科學
         synonyms: [science]
 
+  - name: 人機互動
+    tags:
+      - canonical: UI設計
+        synonyms: [UI design, 介面設計]
+      - canonical: UX研究
+        synonyms: [UX research, 使用者研究]
+      - canonical: 互動設計
+        synonyms: [interaction design]
+      - canonical: AI應用
+        synonyms: [人工智慧應用, AI application]
+      - canonical: 可用性
+        synonyms: [usability, 易用性]
+      - canonical: 人因工程
+        synonyms: [human factors, 人體工學]
+
   - name: 通用概念
     tags:
       - canonical: 決策思維

@@ -13,7 +13,7 @@ const allTags = getAllTags();
 const categories = new Set(posts.map((p) => p.category?.title).filter(Boolean));
 
 const metadata = {
-  title: '個人知識庫 — 投資知識・產品管理・讀書心得',
+  title: '陳孟真的blog — 投資知識・產品管理・讀書心得・人機互動',
   ignoreTitleTemplate: true,
 };
 ---
@@ -21,16 +21,16 @@ const metadata = {
 <Layout metadata={metadata}>
   <HeroText>
     <Fragment slot="title">
-      個人知識庫
+      陳孟真的blog
     </Fragment>
 
     <Fragment slot="subtitle">
-      投資知識・產品管理・讀書心得
+      投資知識・產品管理・讀書心得・人機互動
     </Fragment>
 
     <Fragment slot="content">
       <p class="text-sm sm:text-base md:text-lg text-muted dark:text-slate-400 text-center max-w-3xl mx-auto leading-relaxed">
-        匯集投資研究、產品管理實務與讀書心得<br />
+        匯集投資研究、產品管理實務、讀書心得與人機互動探索<br />
         用系統化的方式累積和分享知識
       </p>
     </Fragment>
@@ -48,6 +48,6 @@ const metadata = {
     title="最新文章"
     linkText="查看所有文章"
     count={6}
-    information="持續更新中 — 投資知識、產品管理心法、讀書筆記與反思。"
+    information="持續更新中 — 投資知識、產品管理心法、讀書筆記、人機互動探索。"
   />
 </Layout>

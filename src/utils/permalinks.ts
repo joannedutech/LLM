@@ -21,6 +21,16 @@ export const cleanSlug = (text = '') =>
     .map((slug) => slugify(slug))
     .join('/');
 
+const CATEGORY_SLUG_MAP: Record<string, string> = {
+  '投資知識': 'Investment',
+  '產品管理': 'ProductManagement',
+  '讀書心得': 'Opinion',
+  '人機互動': 'HCI',
+};
+
+export const getCategorySlug = (category: string): string =>
+  CATEGORY_SLUG_MAP[category] || cleanSlug(category);
+
 export const BLOG_BASE = cleanSlug(APP_BLOG?.list?.pathname);
 export const CATEGORY_BASE = cleanSlug(APP_BLOG?.category?.pathname);
 export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
@@ -66,7 +76,7 @@ export const getPermalink = (slug = '', type = 'page'): string => {
       break;
 
     case 'category':
-      permalink = createPath(CATEGORY_BASE, cleanSlug(slug));
+      permalink = createPath(CATEGORY_BASE, getCategorySlug(slug));
       break;
 
     case 'tag':

@@ -57,7 +57,7 @@ const postCollection = defineCollection({
     excerpt: z.string().optional(),
     image: z.string().optional(),
 
-    category: z.enum(['投資知識', '產品管理', '讀書心得']).optional(),
+    category: z.enum(['投資知識', '產品管理', '讀書心得', '人機互動']).optional(),
     tags: z.array(z.string()).min(1),
     author: z.string().optional(),
     source: z.string().optional(),
