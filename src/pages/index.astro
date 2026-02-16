@@ -39,9 +39,10 @@ const metadata = {
   <Stats
     stats={[
       { title: '文章數', amount: String(posts.length) },
-      { title: '分類', amount: String(categories.size) },
+      { title: '分類', amount: '4' },
       { title: '標籤', amount: String(allTags.length) },
     ]}
+    classes={{ container: 'max-w-3xl' }}
   />
 
   <BlogLatestPosts
