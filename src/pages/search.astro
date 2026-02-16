@@ -20,13 +20,16 @@ const metadata = {
 <script is:inline>
   async function initPagefind() {
     var el = document.getElementById('search');
-    if (!el) return;
+    if (!el || el.dataset.pagefindInit) return;
+    el.dataset.pagefindInit = 'true';
 
-    // Load CSS
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = '/LLM/pagefind/pagefind-ui.css';
-    document.head.appendChild(link);
+    // Load CSS if not already loaded
+    if (!document.querySelector('link[href*="pagefind-ui.css"]')) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = '/LLM/pagefind/pagefind-ui.css';
+      document.head.appendChild(link);
+    }
 
     try {
       var pagefind = await import('/LLM/pagefind/pagefind-ui.js');
@@ -45,7 +48,9 @@ const metadata = {
       el.innerHTML = '<p style="text-align:center;padding:2rem;color:#666;">搜尋功能需要先執行 build 才能使用。</p>';
     }
   }
+  // Run on initial load and on View Transitions navigation
   initPagefind();
+  document.addEventListener('astro:page-load', initPagefind);
 </script>
 
 <style is:inline>
