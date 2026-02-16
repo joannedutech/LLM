@@ -9,7 +9,7 @@ import ToBlogLink from '~/components/blog/ToBlogLink.astro';
 
 import Breadcrumbs from '~/components/common/Breadcrumbs.astro';
 import PostNavigation from '~/components/blog/PostNavigation.astro';
-import { getCanonical, getPermalink } from '~/utils/permalinks';
+import { getCanonical, getPermalink, getHomePermalink, getBlogPermalink } from '~/utils/permalinks';
 import { getStaticPathsBlogPost, blogPostRobots } from '~/utils/blog';
 import { findImage } from '~/utils/images';
 import type { MetaData } from '~/types';
@@ -59,8 +59,8 @@ const metadata = merge(
   url: url,
 }}>
   <Breadcrumbs items={[
-    { label: '首頁', href: '/' },
-    { label: '文章列表', href: '/blog' },
+    { label: '首頁', href: getHomePermalink() },
+    { label: '文章列表', href: getBlogPermalink() },
     ...(post.category ? [{ label: post.category.title, href: getPermalink(post.category.slug, 'category') }] : []),
     { label: post.title },
   ]} />

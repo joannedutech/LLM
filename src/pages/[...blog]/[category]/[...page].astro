@@ -1,6 +1,7 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import { blogCategoryRobots, getStaticPathsBlogCategory } from '~/utils/blog';
+import { getHomePermalink, getBlogPermalink } from '~/utils/permalinks';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
@@ -31,8 +32,8 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <Breadcrumbs items={[
-    { label: '首頁', href: '/' },
-    { label: '文章列表', href: '/blog' },
+    { label: '首頁', href: getHomePermalink() },
+    { label: '文章列表', href: getBlogPermalink() },
     { label: category.title },
   ]} />
   <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
